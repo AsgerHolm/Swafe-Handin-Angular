@@ -1,0 +1,7 @@
+<p>credit-card-list works!</p>
+<li *ngFor="let cards of creditCardService.getCreditCards() | async; index as i">
+<p>{{cards.card_number}}</p>
+<p>{{cards.cardholder_name}}</p>
+<p>{{cards.issuer}}</p>
+<a routerLink='details/{{i}}'>Card details</a>
+</li>
