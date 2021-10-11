@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path:'creditcards',
     loadChildren: () => import('./credit-card/credit-card.module').then(m => m.CreditCardModule)
+  },
+  {
+    path: 'creditcards/add',
+    loadChildren: () => import('./credit-card/credit-card.module').then(m => m.CreditCardModule)
   }
 ];
 
