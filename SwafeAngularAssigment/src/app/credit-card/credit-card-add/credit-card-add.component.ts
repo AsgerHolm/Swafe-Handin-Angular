@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { CreditCardService } from '../credit-card.service';
 
 @Component({
   selector: 'app-credit-card-add',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreditCardAddComponent implements OnInit {
 
-  constructor() { }
+  constructor(public creditCardService: CreditCardService) { }
 
   ngOnInit(): void {
   }
 
+  onSubmit(form: NgForm)
+  {
+    this.creditCardService.createCreditCard(form.value);
+  }
 }

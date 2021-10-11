@@ -1,1 +1,17 @@
 <p>credit-card-add works!</p>
+
+<form #f='ngForm' (onSubmit)='onSubmit(f)'>
+
+<div class="form-wrapper">
+    <label for="card_number">Creditcard number</label>
+    <br>
+    <input type="text" name="card_number" ngModel #card_number="ngModel" required>
+    <div *ngIf="card_number.invalid && (card_number.dirty || card_number.touched)">
+        <div *ngIf="card_number.errors?.required">
+                Card number must be set
+        </div>
+    </div>
+</div>
+
+
+</form>

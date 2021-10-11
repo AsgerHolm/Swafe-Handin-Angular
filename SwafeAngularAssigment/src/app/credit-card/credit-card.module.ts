@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms';
 import { CreditCardRoutingModule } from './credit-card-routing.module';
 import { CreditCardListComponent } from './credit-card-list/credit-card-list.component';
 import { CreditCardListItemComponent } from './credit-card-list-item/credit-card-list-item.component';
@@ -17,7 +17,8 @@ import { CreditCardDetailsComponent } from './credit-card-details/credit-card-de
   ],
   imports: [
     CommonModule,
-    CreditCardRoutingModule
+    CreditCardRoutingModule,
+    FormsModule
   ]
 })
 export class CreditCardModule { }
