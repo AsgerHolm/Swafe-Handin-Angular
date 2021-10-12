@@ -18,9 +18,6 @@ export class CreditCardService {
     
    return this.http.get<CreditCard[]>('http://localhost:3000/credit_cards');
      
-
-    //return of(this.cards);
-    
   }
   
   getCreditCard(index: number): CreditCard{
@@ -30,23 +27,25 @@ export class CreditCardService {
 
   createCreditCard( card: CreditCard): boolean
   {
-
+    this.http.post<CreditCard>('http://localhost:3000/transactions',card)
     return false;
   }
 
-  /*getTransactions(): Observable<Transaction[]>
+  getTransactions(): Observable<Transaction[]>
   {
-    return of(this.trans);
-  }*/
+    return this.http.get<Transaction[]>('http://localhost:3000/transactions');
+  }
 
   createTransaction(transaction: Transaction): boolean
   {
-
+      this.http.post<Transaction>('http://localhost:3000/transactions',transaction);
     return false;
   }
 
   deleteCreditCard(creditCard: CreditCard): boolean
   {
+    var cardNumber = creditCard.card_number;
+    this.http.delete<CreditCard>('$http://localhost:3000/credit_cards/{this.cardNumber}')
     return false;
   }
   deleteTransaction(transaction: Transaction): boolean

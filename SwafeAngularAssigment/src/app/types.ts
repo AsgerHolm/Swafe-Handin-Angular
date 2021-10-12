@@ -18,10 +18,11 @@ export interface CreditCard {
 
 export interface Transaction{
 
-    credit_card: CreditCard; // required
-    amount: number; //required
-    currency: string;//required
-    date: Date; //required
-    note?: string;
+    credit_card: CreditCard;
+  amount: number;
+  comment: string;
+  date: number;
+  currency: string;
+  uid?: string;
 
 }
