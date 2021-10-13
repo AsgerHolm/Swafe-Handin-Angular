@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CreditCardService } from 'src/app/credit-card/credit-card.service';
 import { Transaction } from 'src/app/types';
 
@@ -9,9 +9,11 @@ import { Transaction } from 'src/app/types';
 })
 export class TransactionListComponent implements OnInit {
 
+ 
 
   public transArray: Transaction[] | undefined;
   public filteredTransArray: Transaction[] | undefined;
+  public cardNumber: number | undefined ;
   constructor(public cardService: CreditCardService) { }
 
   ngOnInit(): void {
@@ -19,4 +21,11 @@ export class TransactionListComponent implements OnInit {
     this.transArray = this.cardService.getTransactions();
   }
 
+  getFilteredTransactions(cardNumber: number): void
+  {
+    
+  } 
+
 }
+
+

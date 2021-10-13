@@ -9,7 +9,8 @@ import { TransactionListComponent } from './transaction-list/transaction-list.co
 @NgModule({
   declarations: [
     TransactionsComponent,
-    TransactionListComponent
+    TransactionListComponent,
+    
   ],
   imports: [
     CommonModule,

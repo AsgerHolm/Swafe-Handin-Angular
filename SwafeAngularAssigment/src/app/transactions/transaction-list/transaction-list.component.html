@@ -1,4 +1,6 @@
-<p>transaction-list works!</p>
+
+
+
 
 <li *ngFor="let Transaction of transArray; let i = index ">
 <p> Card number: {{Transaction.credit_card.card_number}}</p>
@@ -7,3 +9,4 @@
 <p>Transaction date: {{Transaction.date | date }}</p>
 <a routerLink='details/{{i}}'>Card details</a>
 </li>
+
