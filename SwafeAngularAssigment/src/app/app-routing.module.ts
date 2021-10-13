@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'creditcards/add',
     loadChildren: () => import('./credit-card/credit-card.module').then(m => m.CreditCardModule)
+  },
+  {
+    path: 'transactions',
+    loadChildren: () => import('./transactions/transactions.module').then(m => m.TransactionsModule)
   }
 ];
 

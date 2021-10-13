@@ -10,6 +10,8 @@ export class CreditCardService {
 
   rootUrl = 'http://localhost:3000'
   public cardArray: CreditCard[] | undefined;
+  public transArray: Transaction[] | undefined;
+
   constructor(private http: HttpClient) { }
   
 
@@ -31,10 +33,20 @@ export class CreditCardService {
     return false;
   }
 
-  getTransactions(): Observable<Transaction[]>
+  getFilteredTransactions(cardNumber: number): Transaction[]
   {
-    return this.http.get<Transaction[]>('http://localhost:3000/transactions');
+    
+    return this.transArray!
+      .filter(trans => trans.credit_card.card_number == cardNumber);
+
   }
+  getTransactions(): Transaction[]
+  {
+    this.http.get<Transaction[]>('http://localhost:3000/transactions').subscribe(x => this.transArray = x);
+    return this.transArray!;
+  }
+
+
 
   createTransaction(transaction: Transaction): boolean
   {
