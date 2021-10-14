@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CreditCardService } from 'src/app/credit-card/credit-card.service';
 import { Transaction } from 'src/app/types';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-transaction-list',
@@ -9,22 +10,21 @@ import { Transaction } from 'src/app/types';
 })
 export class TransactionListComponent implements OnInit {
 
- 
+  public transArray: Observable<Transaction[]> | null = null;
 
-  public transArray: Transaction[] | undefined;
-  public filteredTransArray: Transaction[] | undefined;
-  public cardNumber: number | undefined ;
   constructor(public cardService: CreditCardService) { }
 
   ngOnInit(): void {
-
     this.transArray = this.cardService.getTransactions();
   }
 
-  getFilteredTransactions(cardNumber: number): void
-  {
-    
-  } 
+  filter(cardNumber: string) {
+    this.transArray = of(this.cardService.getFilteredTransactions(cardNumber));
+  }
+
+  reset() {
+    this.transArray = this.cardService.getTransactions();
+  }
 
 }
 

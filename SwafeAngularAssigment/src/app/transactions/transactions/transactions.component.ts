@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CreditCardService } from '../../credit-card/credit-card.service';
+import { ActivatedRoute } from '@angular/router';
+import { Transaction } from 'src/app/types';
 
 @Component({
   selector: 'app-transactions',
