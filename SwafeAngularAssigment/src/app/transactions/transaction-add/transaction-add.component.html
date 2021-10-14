@@ -1,1 +1,63 @@
-<p>transaction-add works!</p>
+<h1>Transaction</h1>
+
+<form #f='ngForm' (ngSubmit)='onSubmit(f)'>
+
+  <div class="form-wrapper">
+    <ul class="container column">
+
+      <li>
+        <label for="credit_card">Creditcard number</label>
+        <br>
+        <input type="text" name="card_number" ngModel #card_number="ngModel" required minlength="7" maxlength="16"
+          appOnlyInts>
+        <div *ngIf="card_number.invalid && (card_number.dirty || card_number.touched)">
+          <div *ngIf="card_number.errors?.required">
+            Card number must be set.
+          </div>
+          <div *ngIf="card_number.errors?.minlength">
+            Card number must be atleast 7 digits.
+          </div>
+          <div *ngIf="card_number.errors?.maxlength">
+            Card number must be maximum 16 digits.
+          </div>
+          <div *ngIf="card_number.errors?.only_ints">
+            {{ card_number.errors?.only_ints }}
+          </div>
+        </div>
+        <br>
+      </li>
+
+      <li>
+        <label for="amount">amount</label>
+        <br>
+        <input type="number" name="amount" ngModel #amount="ngModel" required>
+    
+      </li>
+
+      <li>
+        <label for="comment">comment</label>
+        <br>
+        <input type="text" name="comment" ngModel #comment="ngModel" >
+
+      </li>
+
+      <li>
+        <label for="date">transaction date</label>
+        <br>
+        <input type="date" name="date" ngModel #date="ngModel" required>
+      
+      </li>
+
+      <li>
+        <label for="currency">currency</label>
+        <br>
+        <input type="text" name="currency" ngModel #currency="ngModel" maxlength="3" required>
+        <br>
+      </li>
+      <li>
+        <button type="submit" [disabled]="f.invalid">Create Transaction</button>
+      </li>
+    </ul>
+  </div>
+</form>
+

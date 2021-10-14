@@ -33,6 +33,7 @@ export class TransactionListComponent implements OnInit {
 deleteTransaction(id: string): void {
     console.log(id);
     this.cardService.deleteTransaction(id);
+    this.transArray = this.cardService.getTransactions();
   }
 
 }
