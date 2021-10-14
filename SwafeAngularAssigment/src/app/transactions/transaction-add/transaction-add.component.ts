@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -8,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionAddComponent implements OnInit {
 
-  constructor() { }
+  constructor(formBuilder: FormBuilder) { }
+
+
+
 
   ngOnInit(): void {
   }

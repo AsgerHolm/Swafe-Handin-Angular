@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CreditCardService } from 'src/app/credit-card/credit-card.service';
 import { CreditCard, Transaction } from 'src/app/types';
 import { filter, map } from 'rxjs/operators'
-import { Transaction } from 'src/app/types';
 import { Observable, of } from 'rxjs';
 
 

@@ -43,9 +43,9 @@ export class CreditCardService {
   }
 
 
-  // Transactions
-  getTransactions(): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`$http://localhost:3000/transactions`)
+   // Transactions
+   getTransactions(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.rootUrl}/transactions`)
       .pipe(tap(x => x.forEach(y => y.uid = this.generateUUID())));
   }
 
@@ -53,28 +53,23 @@ export class CreditCardService {
     return this.transactions.find(x => x.uid.toString() == uid);
   }
 
-  getFilteredTransactions(cardNumber: string): Transaction[] {
+   getFilteredTransactions(cardNumber: string): Transaction[] {
     return this.transactions.filter(x => x.credit_card.card_number.toString() == cardNumber);
   }
 
   createTransaction(transaction: Transaction): boolean {
-    this.http.post<any>(`$http://localhost:3000/transactions`, transaction);
+    //this.http.post<Transaction>(`${this.rootUrl}/transactions`, transaction);
     return false;
   }
 
   deleteTransaction(id: string): void
   {
-   var response = this.http.delete('$http://localhost:3000/transactions/{id}')
+   var response = this.http.delete(`${this.rootUrl}/transactions/{this.id}`)
 
    
   }
 
- 
 
-
-  deleteTransaction(transaction: Transaction): boolean {
-    return false;
-  }
 
   private generateUUID(): string {
     return UUID.UUID()
