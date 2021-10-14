@@ -14,10 +14,23 @@
     </div>
     <div>
         <label>Card Expiration Date: </label>
-        <p>{{card!.expiration_date_month}}/{{card!.expiration_date_year}}</p>
+        <p>{{card!.expiration_date_month| ExpirationDate: card!.expiration_date_year }} </p>
     </div>
     <div>
         <label>Card Issuer: </label>
         <p>{{card!.issuer}}</p>
     </div>
+    <button type="button" (click)="delete(card)">
+        Delete this card
+    </button>
 </div>
+<hr>
+<h2>Card Transactions: </h2>
+<li class="container row" *ngFor="let transaction of transactions;">
+    <label>Amount: </label>
+    <p>{{transaction.amount}}</p>
+    <label>Currency: </label>
+    <p>{{transaction.currency}}</p>
+    <label>Date: </label>
+    <p>{{transaction.date}}</p>
+</li>
