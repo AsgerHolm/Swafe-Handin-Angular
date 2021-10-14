@@ -57,9 +57,12 @@ export class CreditCardService {
     return this.transactions.filter(x => x.credit_card.card_number.toString() == cardNumber);
   }
 
-  createTransaction(transaction: Transaction): boolean {
-    //this.http.post<Transaction>(`${this.rootUrl}/transactions`, transaction);
-    return false;
+  createTransaction(transaction: Transaction, creditCardNumber: string): void {
+
+    var tempCard = this.cards.find(x => x.card_number == creditCardNumber)
+    transaction.credit_card = tempCard!;
+    this.http.post<Transaction>(`${this.rootUrl}/transactions`, transaction);
+    
   }
 
   deleteTransaction(id: string): void
