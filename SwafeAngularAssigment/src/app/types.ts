@@ -25,3 +25,13 @@ export interface Transaction {
   currency: string;
   uid: string;
 }
+
+export interface AddTransaction{
+  card_number: string;
+  amount: number;
+  comment: string;
+  date: number;
+  currency: string;
+  uid: string;
+
+}

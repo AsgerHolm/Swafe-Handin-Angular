@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
-import { CreditCard, Transaction } from '../types';
+import { AddTransaction, CreditCard, Transaction } from '../types';
 import { HttpClient } from '@angular/common/http'
 import { UUID } from 'angular2-uuid';
 
@@ -30,8 +30,8 @@ export class CreditCardService {
   }
 
   deleteCreditCard(creditCard: CreditCard): boolean {
-    //var cardNumber = creditCard.card_number;
-    //this.http.delete<CreditCard>(`${this.rootUrl}/credit_cards/${creditCard}`)
+    var cardNumber = creditCard.card_number;
+    this.http.delete<CreditCard>(`${this.rootUrl}/credit_cards/${cardNumber}`)
     return false;
   }
 
@@ -57,17 +57,26 @@ export class CreditCardService {
     return this.transactions.filter(x => x.credit_card.card_number.toString() == cardNumber);
   }
 
-  createTransaction(transaction: Transaction, creditCardNumber: string): void {
+  public createTransaction(transaction: AddTransaction): Observable<Transaction> {
 
-    var tempCard = this.cards.find(x => x.card_number == creditCardNumber)
-    transaction.credit_card = tempCard!;
-    this.http.post<Transaction>(`${this.rootUrl}/transactions`, transaction);
+   
+    const trans: Transaction = {
+      credit_card: this.cards.find(x => x.card_number == transaction.card_number)!,
+      amount: transaction.amount,
+      comment: transaction.comment,
+      date: transaction.date,
+      currency: transaction.currency,
+      uid: this.generateUUID()
+    }
+
+    
+    return this.http.post<Transaction>(`http://localhost:3000/transactions`, trans);
     
   }
 
   deleteTransaction(id: string): void
   {
-   var response = this.http.delete(`${this.rootUrl}/transactions/:${id}`)
+   this.http.delete<any>(`http://localhost:3000/transactions/${id}`)
 
    
   }

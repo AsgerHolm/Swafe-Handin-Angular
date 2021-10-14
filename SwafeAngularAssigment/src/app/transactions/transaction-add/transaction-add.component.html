@@ -6,7 +6,7 @@
     <ul class="container column">
 
       <li>
-        <label for="credit_card">Creditcard number</label>
+        <label for="card_number">Creditcard number</label>
         <br>
         <input type="text" name="card_number" ngModel #card_number="ngModel" required minlength="7" maxlength="16"
           appOnlyInts>
@@ -20,9 +20,7 @@
           <div *ngIf="card_number.errors?.maxlength">
             Card number must be maximum 16 digits.
           </div>
-          <div *ngIf="card_number.errors?.only_ints">
-            {{ card_number.errors?.only_ints }}
-          </div>
+          
         </div>
         <br>
       </li>

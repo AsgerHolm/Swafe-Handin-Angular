@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NgForm } from '@angular/forms';
-import { Transaction } from 'src/app/types';
+import { AddTransaction, Transaction } from 'src/app/types';
 import { CreditCardService } from 'src/app/credit-card/credit-card.service';
 
 
@@ -23,15 +23,15 @@ export class TransactionAddComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    const trans: Transaction = {
-      credit_card: form.value.credit_card ??"",
+    const trans: AddTransaction  = {
+      card_number: form.value.card_number ,
       amount: form.value.amount,
       comment: form.value.comment,
       date: form.value.date,
       currency: form.value.currency,
       uid: form.value.uid ?? ""
     }
-    console.log(trans + form.value.credit_card);
-    this.creditCardService.createTransaction(trans, form.value.credit_card);
+    console.log(trans);
+    this.creditCardService.createTransaction(trans);
   }
 }
