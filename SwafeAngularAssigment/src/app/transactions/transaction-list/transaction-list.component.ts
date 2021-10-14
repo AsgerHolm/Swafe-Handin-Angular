@@ -44,10 +44,10 @@ export class TransactionListComponent implements OnInit {
     //this.transArray$ = this.cardService.getTransactions()//.subscribe(x => this.$transArray = x);//.pipe(map(items => items.filter( item => item.credit_card.card_number == 42639882640269299)));
   }
 
-  getFilteredTransactions(cardNumber: number): void
-  {
-    
-  } 
+  deleteTransaction(id: string): void {
+    console.log(id);
+    this.cardService.deleteTransaction(id);
+  }
 
   
 

@@ -64,9 +64,11 @@ export class CreditCardService {
     this.http.delete<CreditCard>('$http://localhost:3000/credit_cards/{this.cardNumber}')
     return false;
   }
-  deleteTransaction(transaction: Transaction): boolean
+  deleteTransaction(id: string): void
   {
-    return false;
+   var response = this.http.delete('$http://localhost:3000/transactions/{id}')
+
+   
   }
 
   

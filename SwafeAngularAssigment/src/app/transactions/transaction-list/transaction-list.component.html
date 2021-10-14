@@ -6,7 +6,8 @@
         
     <input type="text" id="search" name="search" #search>
     <button type="button"  > heij</button>
-      
+    <button> <a routerLink='creditcards'>Add transaction</a> </button>
+    
     
     
 <li class="container column" *ngFor="let Transaction of transArray$ | async ; let i = index ">
@@ -24,6 +25,9 @@
     </div>
     <button (click)="filterTrans(Transaction.credit_card)">
         FILTER THIS SHIT
+    </button>
+    <button (click)="deleteTransaction(Transaction.uid!)">
+        Delete
     </button>
     
 </li>
