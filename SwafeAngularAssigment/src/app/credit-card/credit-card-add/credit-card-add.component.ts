@@ -5,7 +5,7 @@ import { CreditCardService } from '../credit-card.service';
 @Component({
   selector: 'app-credit-card-add',
   templateUrl: './credit-card-add.component.html',
-  styleUrls: ['./credit-card-add.component.css']
+  styleUrls: ['./credit-card-add.component.scss']
 })
 export class CreditCardAddComponent implements OnInit {
 

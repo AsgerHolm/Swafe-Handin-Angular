@@ -5,7 +5,7 @@ import { CreditCardService } from '../credit-card.service';
 @Component({
   selector: 'app-credit-card-list-item',
   templateUrl: './credit-card-list-item.component.html',
-  styleUrls: ['./credit-card-list-item.component.css']
+  styleUrls: ['./credit-card-list-item.component.scss']
 })
 export class CreditCardListItemComponent implements OnInit {
 

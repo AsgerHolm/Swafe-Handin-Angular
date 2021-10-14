@@ -1,0 +1,33 @@
+.row {
+  flex-direction: row;
+}
+.column {
+  flex-direction: column;
+}
+nav {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  border-bottom: #064064;
+  border-bottom-style: solid;
+  border-bottom-width: 1;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { 
+    display: inline-block; 
+  }
+
+  a {
+    display: block;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: #064064;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+}

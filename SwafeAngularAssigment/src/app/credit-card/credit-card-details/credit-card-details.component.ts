@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-credit-card-details',
   templateUrl: './credit-card-details.component.html',
-  styleUrls: ['./credit-card-details.component.css']
+  styleUrls: ['./credit-card-details.component.scss']
 })
 export class CreditCardDetailsComponent implements OnInit {
 
