@@ -1,17 +1,109 @@
-<p>credit-card-add works!</p>
+<h1>Add Credit Card</h1>
 
-<form #f='ngForm' (onSubmit)='onSubmit(f)'>
+<form #f='ngForm' (ngSubmit)='onSubmit(f)'>
 
-<div class="form-wrapper">
-    <label for="card_number">Creditcard number</label>
-    <br>
-    <input type="text" name="card_number" ngModel #card_number="ngModel" required>
-    <div *ngIf="card_number.invalid && (card_number.dirty || card_number.touched)">
-        <div *ngIf="card_number.errors?.required">
-                Card number must be set
+  <div class="form-wrapper">
+    <ul class="container column">
+
+      <li>
+        <label for="card_number">Creditcard number</label>
+        <br>
+        <input type="text" name="card_number" ngModel #card_number="ngModel" required minlength="7" maxlength="16"
+          appOnlyInts>
+        <div *ngIf="card_number.invalid && (card_number.dirty || card_number.touched)">
+          <div *ngIf="card_number.errors?.required">
+            Card number must be set.
+          </div>
+          <div *ngIf="card_number.errors?.minlength">
+            Card number must be atleast 7 digits.
+          </div>
+          <div *ngIf="card_number.errors?.maxlength">
+            Card number must be maximum 16 digits.
+          </div>
+          <div *ngIf="card_number.errors?.only_ints">
+            {{ card_number.errors?.only_ints }}
+          </div>
         </div>
-    </div>
-</div>
+        <br>
+      </li>
 
+      <li>
+        <label for="csc_code">CSC Code</label>
+        <br>
+        <input type="text" name="csc_code" ngModel #csc_code="ngModel" required minlength="3" maxlength="3" appOnlyInts>
+        <div *ngIf="csc_code.invalid && (csc_code.dirty || csc_code.touched)">
+          <div *ngIf="csc_code.errors?.required">
+            CSC Code must be set.
+          </div>
+          <div *ngIf="csc_code.errors?.minlength">
+            CSC Code must be 3 digits.
+          </div>
+          <div *ngIf="csc_code.errors?.only_ints">
+            {{ csc_code.errors?.only_ints }}
+          </div>
+        </div>
+        <br>
+      </li>
 
+      <li>
+        <label for="cardholder_name">Cardholder Name</label>
+        <br>
+        <input type="text" name="cardholder_name" ngModel #cardholder_name="ngModel" required>
+        <div *ngIf="cardholder_name.invalid && (cardholder_name.dirty || cardholder_name.touched)">
+          <div *ngIf="cardholder_name.errors?.required">
+            Cardholder Name must be set.
+          </div>
+        </div>
+        <br>
+      </li>
+
+      <li>
+        <label for="expiration_date_year">Expiration Year</label>
+        <br>
+        <input type="number" name="expiration_date_year" ngModel #expiration_date_year="ngModel" required min="1"
+          max="31">
+        <div *ngIf="expiration_date_year.invalid && (expiration_date_year.dirty || expiration_date_year.touched)">
+          <div *ngIf="expiration_date_year.errors?.required">
+            Expiration Year must be set.
+          </div>
+          <div *ngIf="expiration_date_year.errors?.min">
+            Expiration Year must be atleast {{ expiration_date_year.errors?.min.min }}.
+          </div>
+          <div *ngIf="expiration_date_year.errors?.max">
+            Expiration Year must be atmost {{ expiration_date_year.errors?.max.max }}.
+          </div>
+        </div>
+        <br>
+      </li>
+
+      <li>
+        <label for="expiration_date_month">Expiration Month</label>
+        <br>
+        <input type="number" name="expiration_date_month" ngModel #expiration_date_month="ngModel" required min="1"
+          max="12">
+        <div *ngIf="expiration_date_month.invalid && (expiration_date_month.dirty || expiration_date_month.touched)">
+          <div *ngIf="expiration_date_month.errors?.required">
+            Expiration Month must be set.
+          </div>
+          <div *ngIf="expiration_date_month.errors?.min">
+            Expiration Month must be atleast {{ expiration_date_month.errors?.min.min }}.
+          </div>
+          <div *ngIf="expiration_date_month.errors?.max">
+            Expiration Month must be atmost {{ expiration_date_month.errors?.max.max }}.
+          </div>
+        </div>
+        <br>
+      </li>
+
+      <li>
+        <label for="issuer">Issuer</label>
+        <br>
+        <input type="text" name="issuer" ngModel #issuer="ngModel">
+        <br>
+      </li>
+      <li>
+        <button type="submit" [disabled]="f.invalid">Create Card</button>
+      </li>
+    </ul>
+  </div>
 </form>

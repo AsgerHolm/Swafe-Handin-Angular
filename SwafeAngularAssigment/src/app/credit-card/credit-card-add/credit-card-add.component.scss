@@ -1,0 +1,30 @@
+.form-wrapper {
+    margin: 16px;
+    max-width: 400px;
+    justify-items: center;
+}
+
+.row {
+    flex-direction: row;
+  }
+  .column {
+    flex-direction: column;
+  }
+
+  li { 
+    display: inline-grid; 
+    padding: 4px;
+    margin: 4px;
+  }
+
+  h1 {
+    display: block;
+    padding: 4px 10px;
+    color: #064064;
+    font-size: x-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  label {
+      font-size: large;
+  }
