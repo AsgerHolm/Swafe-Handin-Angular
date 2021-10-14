@@ -64,7 +64,7 @@ export class CreditCardService {
 
   deleteTransaction(id: string): void
   {
-   var response = this.http.delete(`${this.rootUrl}/transactions/{this.id}`)
+   var response = this.http.delete(`${this.rootUrl}/transactions/:${id}`)
 
    
   }
