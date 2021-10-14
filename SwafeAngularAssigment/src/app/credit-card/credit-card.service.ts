@@ -1,69 +1,67 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 import { CreditCard, Transaction } from '../types';
 import { HttpClient } from '@angular/common/http'
+import { UUID } from 'angular2-uuid';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreditCardService {
 
-  rootUrl = 'http://localhost:3000'
-  public cardArray: CreditCard[] | undefined;
-  public transArray: Transaction[] | undefined;
+  private rootUrl = 'http://localhost:3000'
+  private cards: CreditCard[] = [];
+  private transactions: Transaction[] = [];
 
-  constructor(private http: HttpClient) { }
-  
-
-
-  getCreditCards(): Observable<CreditCard[]>{
-    
-   return this.http.get<CreditCard[]>('http://localhost:3000/credit_cards');
-     
-  }
-  
-  getCreditCard(index: number): CreditCard{
-    this.http.get<CreditCard[]>('http://localhost:3000/credit_cards').subscribe(x => this.cardArray = x);
-    return(this.cardArray![index]);
+  constructor(private http: HttpClient) {
+    this.getCreditCards().subscribe(cards => this.cards = cards as CreditCard[])
+    this.getTransactions().subscribe(transactions => this.transactions = transactions as Transaction[])
   }
 
-  createCreditCard( card: CreditCard): boolean
-  {
-    this.http.post<CreditCard>('http://localhost:3000/transactions',card)
+
+  // Credit Cards
+  getCreditCards(): Observable<CreditCard[]> {
+    return this.http.get<CreditCard[]>(`${this.rootUrl}/credit_cards`);
+  }
+
+  getCreditCard(cardNumber: string): CreditCard | undefined {
+    return this.cards.find(x => x.card_number.toString() == cardNumber);
+  }
+
+  deleteCreditCard(creditCard: CreditCard): boolean {
+    //var cardNumber = creditCard.card_number;
+    //this.http.delete<CreditCard>(`${this.rootUrl}/credit_cards/${creditCard}`)
     return false;
   }
 
-  /*getFilteredTransactions(cardNumber: number): Transaction[]
-  {
-    
-    return this.transArray!
-      .filter(trans => trans.credit_card.card_number == cardNumber);
 
-  }*/
+  createCreditCard(card: CreditCard): boolean {
+   this.http.post<CreditCard>(`$http://localhost:3000/transactions`, card)
+    return false;
 
-  getTransactions(): Observable<Transaction[]>
-  {
-    //this.http.get<Transaction[]>('http://localhost:3000/transactions').subscribe(x => this.transArray = x);
-    //return this.transArray!;
-
-    return this.http.get<Transaction[]>('http://localhost:3000/transactions');
-      
   }
 
 
+  // Transactions
+  getTransactions(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`$http://localhost:3000/transactions`)
+      .pipe(tap(x => x.forEach(y => y.uid = this.generateUUID())));
+  }
 
-  createTransaction(transaction: Transaction): boolean
-  {
-      this.http.post<Transaction>('http://localhost:3000/transactions',transaction);
+  getTransaction(uid: string): Transaction | undefined {
+    return this.transactions.find(x => x.uid.toString() == uid);
+  }
+
+  getFilteredTransactions(cardNumber: string): Transaction[] {
+    return this.transactions.filter(x => x.credit_card.card_number.toString() == cardNumber);
+  }
+
+  createTransaction(transaction: Transaction): boolean {
+    this.http.post<any>(`$http://localhost:3000/transactions`, transaction);
     return false;
   }
 
-  deleteCreditCard(creditCard: CreditCard): boolean
-  {
-    var cardNumber = creditCard.card_number;
-    this.http.delete<CreditCard>('$http://localhost:3000/credit_cards/{this.cardNumber}')
-    return false;
-  }
   deleteTransaction(id: string): void
   {
    var response = this.http.delete('$http://localhost:3000/transactions/{id}')
@@ -71,48 +69,17 @@ export class CreditCardService {
    
   }
 
-  
+ 
 
 
+  deleteTransaction(transaction: Transaction): boolean {
+    return false;
+  }
 
-  cards: CreditCard[] =[
-    {
-      card_number : '43215678',
-      cardholder_name : 'Asger',
-      csc_code : 123,
-      expiration_date_month : 12,
-      expiration_date_year : 42,
-      issuer : 'Danskebank'
-    },
-    {
-      card_number : '43278678',
-      cardholder_name : 'Assder',
-      csc_code : 883,
-      expiration_date_month : 2,
-      expiration_date_year : 78,
-      issuer : 'ChinaBankeruh'
-    }
-  ]
+  private generateUUID(): string {
+    return UUID.UUID()
+  }
 
-
-  /*trans: Transaction[] = 
-  [
-    {
-        credit_card: this.cards[0],
-        amount : 456878,
-        currency: 'DKK',
-        date: new Date(1, 12, 1994),
-        
-    },
-    {
-      credit_card: this.cards[1],
-      amount : 40078,
-      currency: 'Yen',
-      date: new Date(8, 8, 2015),
-      
-    }
-  ]
-*/
 }
 
 

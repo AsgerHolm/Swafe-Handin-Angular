@@ -1,9 +1,23 @@
-
-<div>
-<p>{{card!.card_number}}</p>
-<p>{{card!.cardholder_name}}</p>
-<p>{{card!.csc_code}}</p>
-<p>{{card!.expiration_date_month}}</p>
-<p>{{card!.expiration_date_year}}</p>
-<p>{{card!.issuer}}</p>
+<div class="container column">
+    <h1>Credit Card Details</h1>
+    <div>
+        <label>Card number: </label>
+        <p>{{card!.card_number}}</p>
+    </div>
+    <div>
+        <label>Cardholder Name: </label>
+        <p>{{card!.cardholder_name}}</p>
+    </div>
+    <div>
+        <label>Card CSC Code: </label>
+        <p>{{card!.csc_code}}</p>
+    </div>
+    <div>
+        <label>Card Expiration Date: </label>
+        <p>{{card!.expiration_date_month}}/{{card!.expiration_date_year}}</p>
+    </div>
+    <div>
+        <label>Card Issuer: </label>
+        <p>{{card!.issuer}}</p>
+    </div>
 </div>

@@ -16,13 +16,12 @@ export interface CreditCard {
     issuer: string
   }
 
-export interface Transaction{
 
+export interface Transaction {
   credit_card: CreditCard;
   amount: number;
   comment: string;
   date: number;
   currency: string;
-  uid?: string;
-
+  uid: string;
 }
