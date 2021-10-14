@@ -7,7 +7,7 @@
     issuer: string;
 }*/
 export interface CreditCard {
-    card_number: number
+    card_number: string
     csc_code: number
     cardholder_name: string
     expiration_date_month: number
@@ -18,7 +18,7 @@ export interface CreditCard {
 
 export interface Transaction{
 
-    credit_card: CreditCard;
+  credit_card: CreditCard;
   amount: number;
   comment: string;
   date: number;

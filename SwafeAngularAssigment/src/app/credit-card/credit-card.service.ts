@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CreditCard, Transaction } from '../types';
 import { HttpClient } from '@angular/common/http'
 
@@ -33,17 +33,21 @@ export class CreditCardService {
     return false;
   }
 
-  getFilteredTransactions(cardNumber: number): Transaction[]
+  /*getFilteredTransactions(cardNumber: number): Transaction[]
   {
     
     return this.transArray!
       .filter(trans => trans.credit_card.card_number == cardNumber);
 
-  }
-  getTransactions(): Transaction[]
+  }*/
+
+  getTransactions(): Observable<Transaction[]>
   {
-    this.http.get<Transaction[]>('http://localhost:3000/transactions').subscribe(x => this.transArray = x);
-    return this.transArray!;
+    //this.http.get<Transaction[]>('http://localhost:3000/transactions').subscribe(x => this.transArray = x);
+    //return this.transArray!;
+
+    return this.http.get<Transaction[]>('http://localhost:3000/transactions');
+      
   }
 
 
@@ -71,7 +75,7 @@ export class CreditCardService {
 
   cards: CreditCard[] =[
     {
-      card_number : 43215678,
+      card_number : '43215678',
       cardholder_name : 'Asger',
       csc_code : 123,
       expiration_date_month : 12,
@@ -79,7 +83,7 @@ export class CreditCardService {
       issuer : 'Danskebank'
     },
     {
-      card_number : 43278678,
+      card_number : '43278678',
       cardholder_name : 'Assder',
       csc_code : 883,
       expiration_date_month : 2,
