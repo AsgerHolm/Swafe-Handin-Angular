@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CreditCardService } from 'src/app/credit-card/credit-card.service';
-import { Transaction } from 'src/app/types';
+import { CreditCard, Transaction } from 'src/app/types';
+import { filter, map } from 'rxjs/operators'
 import { Observable, of } from 'rxjs';
+
 
 @Component({
   selector: 'app-transaction-list',
@@ -9,6 +11,8 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./transaction-list.component.scss']
 })
 export class TransactionListComponent implements OnInit {
+
+
 
   public transArray: Observable<Transaction[]> | null = null;
 
@@ -24,6 +28,11 @@ export class TransactionListComponent implements OnInit {
 
   reset() {
     this.transArray = this.cardService.getTransactions();
+  }
+  
+deleteTransaction(id: string): void {
+    console.log(id);
+    this.cardService.deleteTransaction(id);
   }
 
 }

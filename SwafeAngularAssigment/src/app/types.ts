@@ -7,14 +7,15 @@
     issuer: string;
 }*/
 export interface CreditCard {
-  card_number: number
-  csc_code: number
-  cardholder_name: string
-  expiration_date_month: number
-  expiration_date_year: number
-  uid?: string
-  issuer: string
-}
+    card_number: string
+    csc_code: number
+    cardholder_name: string
+    expiration_date_month: number
+    expiration_date_year: number
+    uid?: string
+    issuer: string
+  }
+
 
 export interface Transaction {
   credit_card: CreditCard;

@@ -6,14 +6,14 @@ import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TransactionAddComponent } from './transaction-add/transaction-add.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
     HomeComponent,
-    TransactionAddComponent
+    
     
   ],
   imports: [

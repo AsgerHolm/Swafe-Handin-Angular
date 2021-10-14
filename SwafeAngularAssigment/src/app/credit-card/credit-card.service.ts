@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { CreditCard, Transaction } from '../types';
 import { HttpClient } from '@angular/common/http'
@@ -35,14 +35,16 @@ export class CreditCardService {
     return false;
   }
 
+
   createCreditCard(card: CreditCard): boolean {
-    //this.http.post<CreditCard>(`${this.rootUrl}/transactions`, card)
+   this.http.post<CreditCard>(`$http://localhost:3000/transactions`, card)
     return false;
+
   }
 
 
-  // Transactions
-  getTransactions(): Observable<Transaction[]> {
+   // Transactions
+   getTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this.rootUrl}/transactions`)
       .pipe(tap(x => x.forEach(y => y.uid = this.generateUUID())));
   }
@@ -51,7 +53,7 @@ export class CreditCardService {
     return this.transactions.find(x => x.uid.toString() == uid);
   }
 
-  getFilteredTransactions(cardNumber: string): Transaction[] {
+   getFilteredTransactions(cardNumber: string): Transaction[] {
     return this.transactions.filter(x => x.credit_card.card_number.toString() == cardNumber);
   }
 
@@ -60,13 +62,19 @@ export class CreditCardService {
     return false;
   }
 
-  deleteTransaction(transaction: Transaction): boolean {
-    return false;
+  deleteTransaction(id: string): void
+  {
+   var response = this.http.delete(`${this.rootUrl}/transactions/{this.id}`)
+
+   
   }
+
+
 
   private generateUUID(): string {
     return UUID.UUID()
   }
+
 }
 
 
