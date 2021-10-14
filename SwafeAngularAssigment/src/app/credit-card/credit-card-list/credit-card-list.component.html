@@ -1,8 +1,19 @@
-<p>credit-card-list works!</p>
+<h1>Credit cards</h1>
 
-<li *ngFor="let cards of cardArray; let i = index ">
-<p>{{cards.card_number}}</p>
-<p>{{cards.cardholder_name}}</p>
-<p>{{cards.issuer}}</p>
-<a routerLink='details/{{i}}'>Card details</a>
+<li class="container column" *ngFor="let cards of cardArray; let i = index ">
+    <div>
+        <label>Card number: </label>
+        <p>{{cards.card_number}}</p>
+    </div>
+    <div>
+        <label>Cardholder Name: </label>
+        <p>{{cards.cardholder_name}}</p>
+    </div>
+    <div>
+        <label>Card Issuer: </label>
+        <p>{{cards.issuer}}</p>
+    </div>
+    <button>
+        <a routerLink='details/{{i}}'>Card details</a>
+    </button>
 </li>
