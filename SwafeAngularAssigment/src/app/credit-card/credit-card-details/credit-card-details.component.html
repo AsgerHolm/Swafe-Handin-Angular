@@ -14,7 +14,7 @@
     </div>
     <div>
         <label>Card Expiration Date: </label>
-        <p>{{card!.expiration_date_month}}/{{card!.expiration_date_year}}</p>
+        <p>{{card!.expiration_date_month| ExpirationDate: card!.expiration_date_year }} </p>
     </div>
     <div>
         <label>Card Issuer: </label>

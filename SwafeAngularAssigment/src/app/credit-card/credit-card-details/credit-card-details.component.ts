@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CreditCard, Transaction } from 'src/app/types';
 import { CreditCardService } from '../credit-card.service';
 import { ActivatedRoute } from '@angular/router';
+import { ExpirationDatePipe } from 'src/app/expiration-date.pipe';
 
 @Component({
   selector: 'app-credit-card-details',
@@ -12,7 +13,7 @@ export class CreditCardDetailsComponent implements OnInit {
 
   public card: CreditCard | undefined;
   public transactions: Transaction[] | undefined;
-  constructor(public creditCardService: CreditCardService, public activatedRoute: ActivatedRoute) {
+  constructor(public creditCardService: CreditCardService, public activatedRoute: ActivatedRoute, public exp_date_pipe: ExpirationDatePipe) {
 
     let cardNumber = this.activatedRoute.snapshot.paramMap.get('id');
     if (cardNumber) {
