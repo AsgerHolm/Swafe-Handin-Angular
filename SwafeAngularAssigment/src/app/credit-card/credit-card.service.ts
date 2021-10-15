@@ -13,10 +13,12 @@ export class CreditCardService {
   private rootUrl = 'http://localhost:3000'
   private cards: CreditCard[] = [];
   private transactions: Transaction[] = [];
+  
 
   constructor(private http: HttpClient) {
     this.getCreditCards().subscribe(cards => this.cards = cards as CreditCard[])
     this.getTransactions().subscribe(transactions => this.transactions = transactions as Transaction[])
+    
   }
 
 
@@ -57,7 +59,7 @@ export class CreditCardService {
     return this.transactions.filter(x => x.credit_card.card_number.toString() == cardNumber);
   }
 
-  public createTransaction(transaction: AddTransaction): Observable<Transaction> {
+  public createTransaction(transaction: AddTransaction): void {
 
    
     const trans: Transaction = {
@@ -68,15 +70,18 @@ export class CreditCardService {
       currency: transaction.currency,
       uid: this.generateUUID()
     }
-
+    const headers = {'content-type': 'appliation/json'};
+    const body = JSON.stringify(trans);
     
-    return this.http.post<Transaction>(`http://localhost:3000/transactions`, trans);
+     this.http.post('http://localhost:3000/transactions', trans).subscribe(data => {console.log(data)  ;this.getTransactions();})
     
   }
 
+
+
   deleteTransaction(id: string): void
   {
-   this.http.delete<any>(`http://localhost:3000/transactions/${id}`)
+   this.http.delete<Transaction>(`http://localhost:3000/transactions/${id}`).subscribe(data => {console.log(data) ;  this.getTransactions();})
 
    
   }
