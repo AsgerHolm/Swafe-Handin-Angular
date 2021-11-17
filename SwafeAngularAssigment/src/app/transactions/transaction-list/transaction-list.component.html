@@ -11,7 +11,7 @@
 <button type="button" >
     <a routerLink="addTransaction" > add transaction</a>
 </button>
-<li *ngFor="let Transaction of transArray | async;">
+<li *ngFor="let Transaction of transArray | async">
     <p> Card number: {{Transaction.credit_card.card_number}}</p>
     <p>{{Transaction.amount | number:'1.1-2'}} {{Transaction.currency}} </p>
     <p>{{Transaction.comment}}</p>

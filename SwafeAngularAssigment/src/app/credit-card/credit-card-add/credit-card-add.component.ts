@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { CreditCardService } from '../credit-card.service';
 import { CreditCard } from 'src/app/types';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-credit-card-add',
   templateUrl: './credit-card-add.component.html',
@@ -10,7 +12,7 @@ import { CreditCard } from 'src/app/types';
 })
 export class CreditCardAddComponent implements OnInit {
 
-  constructor(public creditCardService: CreditCardService) { }
+  constructor(public creditCardService: CreditCardService, private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -23,6 +25,7 @@ export class CreditCardAddComponent implements OnInit {
       expiration_date_month: form.value.expiration_date_month,
       issuer: form.value.issuer ?? ""
     }
-    this.creditCardService.createCreditCard(card);
+    this.creditCardService.createCreditCard(card).subscribe();
+    this.router.navigate(['/creditcards']);
   }
 }

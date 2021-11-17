@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CreditCard, Transaction } from 'src/app/types';
 import { CreditCardService } from '../credit-card.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ExpirationDatePipe } from 'src/app/expiration-date.pipe';
+import { TransactionService } from 'src/app/transactions/transaction.service';
 
 @Component({
   selector: 'app-credit-card-details',
@@ -13,22 +14,21 @@ export class CreditCardDetailsComponent implements OnInit {
 
   public card: CreditCard | undefined;
   public transactions: Transaction[] | undefined;
-  constructor(public creditCardService: CreditCardService, public activatedRoute: ActivatedRoute, public exp_date_pipe: ExpirationDatePipe) {
+  constructor(public creditCardService: CreditCardService, public transService: TransactionService, public activatedRoute: ActivatedRoute, public exp_date_pipe: ExpirationDatePipe, private router: Router) {
 
     let cardNumber = this.activatedRoute.snapshot.paramMap.get('id');
     if (cardNumber) {
       this.card = this.creditCardService.getCreditCard(cardNumber)
-      this.transactions = this.creditCardService.getFilteredTransactions(cardNumber);
+      this.transactions = this.transService.getFilteredTransactions(cardNumber);
     }
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   delete(card: CreditCard | undefined): void {
     if (!card) return;
-    this.creditCardService.deleteCreditCard(card);
+    this.creditCardService.deleteCard(card.card_number).subscribe();
+    this.router.navigate(['/creditcards']);
   }
 
 }

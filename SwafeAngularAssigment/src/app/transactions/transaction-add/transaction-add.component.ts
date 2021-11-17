@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { AddTransaction, Transaction } from 'src/app/types';
-import { CreditCardService } from 'src/app/credit-card/credit-card.service';
+import { TransactionService } from 'src/app/transactions/transaction.service';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { CreditCardService } from 'src/app/credit-card/credit-card.service';
 })
 export class TransactionAddComponent implements OnInit {
 
-  constructor(public creditCardService: CreditCardService) { 
+  constructor(public transService: TransactionService) { 
     
   }
 
@@ -32,6 +32,6 @@ export class TransactionAddComponent implements OnInit {
       uid: form.value.uid ?? ""
     }
     console.log(trans);
-    this.creditCardService.createTransaction(trans);
+    this.transService.createTransaction(trans).subscribe();
   }
 }
