@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http'
 import { UUID } from 'angular2-uuid';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,6 +33,13 @@ export class TransactionService {
    getFilteredTransactions(cardNumber: string): Transaction[] {
     return this.transactions.filter(x => x.credit_card.card_number.toString() == cardNumber);
   }
+
+  getFilteredTrans(cardNumber: string, ): Observable<Transaction[]>
+  {
+    return this.http.get<Transaction[]>(`${this.rootUrl}/transactions`).pipe( map( trans => trans.filter( trans => trans.credit_card.card_number.toString() == cardNumber)));
+  }
+
+
 
   public createTransaction(transaction: AddTransaction): Observable<unknown> {
 
