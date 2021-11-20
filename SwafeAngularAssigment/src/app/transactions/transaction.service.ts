@@ -17,13 +17,13 @@ export class TransactionService {
   private cards: CreditCard[] = [];
 
   constructor(private http: HttpClient) { 
-    //this.getTransactions().subscribe(transactions => this.transactions = transactions as Transaction[]);
+    
   }
 
 
   getTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this.rootUrl}/transactions`)
-      //.pipe(tap(x => x.forEach(y => y.uid = this.generateUUID())));
+      
   }
 
   getTransaction(uid: string): Transaction | undefined {

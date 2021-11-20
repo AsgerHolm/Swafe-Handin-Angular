@@ -4,7 +4,7 @@ import { TransactionService } from '../transaction.service';
 import { CreditCard, Transaction } from 'src/app/types';
 import { filter, map } from 'rxjs/operators'
 import { Observable, of } from 'rxjs';
-import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
+
 
 
 @Component({
@@ -13,10 +13,6 @@ import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./transaction-list.component.scss']
 })
 export class TransactionListComponent implements OnInit {
-
-
-
-  //public transArray: Transaction[] | null = null;
 
   public transArray: Observable<Array<any>>  | null = null;
   constructor(public transService: TransactionService) { }
@@ -27,9 +23,12 @@ export class TransactionListComponent implements OnInit {
 
   filter(cardNumber: string) {
    
+    if(cardNumber === "")
+    {
+      return;
+    }
    this.transArray = this.transService.getFilteredTrans(cardNumber);
   }
-
 
   reset() {
     this.transArray = this.transService.getTransactions();
@@ -38,7 +37,7 @@ export class TransactionListComponent implements OnInit {
 deleteTransaction(id: string): void {
     console.log(id);
     this.transService.deleteTransaction(id).subscribe();
-    
+  
   }
 
 }
