@@ -8,11 +8,7 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path:'creditcards',
-    loadChildren: () => import('./credit-card/credit-card.module').then(m => m.CreditCardModule)
-  },
-  {
-    path: 'creditcards/add',
+    path: 'creditcards',
     loadChildren: () => import('./credit-card/credit-card.module').then(m => m.CreditCardModule)
   },
   {

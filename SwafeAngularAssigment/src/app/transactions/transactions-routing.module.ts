@@ -4,8 +4,6 @@ import { TransactionAddComponent } from './transaction-add/transaction-add.compo
 import { TransactionsComponent } from './transactions/transactions.component';
 
 const routes: Routes = [{
-
-
   path: '',
   component: TransactionsComponent
 },

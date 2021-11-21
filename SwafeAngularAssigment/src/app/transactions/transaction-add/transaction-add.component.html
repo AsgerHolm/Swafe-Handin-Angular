@@ -1,4 +1,4 @@
-<h1>Transaction</h1>
+<h1>Add Transaction</h1>
 
 <form #f='ngForm' (ngSubmit)='onSubmit(f)'>
 
@@ -6,7 +6,7 @@
     <ul class="container column">
 
       <li>
-        <label for="card_number">Creditcard number</label>
+        <label for="card_number">Creditcard Number</label>
         <br>
         <input type="text" name="card_number" ngModel #card_number="ngModel" required minlength="7" maxlength="16"
           appOnlyInts>
@@ -20,42 +20,62 @@
           <div *ngIf="card_number.errors?.maxlength">
             Card number must be maximum 16 digits.
           </div>
-          
+          <div *ngIf="card_number.errors?.only_ints">
+            {{ card_number.errors?.only_ints }}
+          </div>
         </div>
         <br>
       </li>
 
       <li>
-        <label for="amount">amount</label>
+        <label for="amount">Amount</label>
         <br>
         <input type="number" name="amount" ngModel #amount="ngModel" required>
-    
-      </li>
-
-      <li>
-        <label for="comment">comment</label>
+        <div *ngIf="amount.invalid && (amount.dirty || amount.touched)">
+          <div *ngIf="amount.errors?.required">
+            Amount must be set.
+          </div>
+        </div>
         <br>
-        <input type="text" name="comment" ngModel #comment="ngModel" >
+      </li>
+
+      <li>
+        <label for="comment">Comment</label>
+        <br>
+        <input type="text" name="comment" ngModel #comment="ngModel">
 
       </li>
 
       <li>
-        <label for="date">transaction date</label>
+        <label for="date">Transaction Date</label>
         <br>
         <input type="date" name="date" ngModel #date="ngModel" required>
-      
+        <div *ngIf="date.invalid && (date.dirty || date.touched)">
+          <div *ngIf="date.errors?.required">
+            Date must be set.
+          </div>
+        </div>
+        <br>
       </li>
 
       <li>
-        <label for="currency">currency</label>
+        <label for="currency">Currency</label>
         <br>
-        <input type="text" name="currency" ngModel #currency="ngModel" maxlength="3" required>
+        <input type="text" name="currency" ngModel #currency="ngModel" required minlength="3" maxlength="3">
+        <div *ngIf="currency.invalid && (currency.dirty || currency.touched)">
+          <div *ngIf="currency.errors?.required">
+            Currency must be set.
+          </div>
+          <div *ngIf="currency.errors?.minlength">
+            Currency must be 3 digits.
+          </div>
+        </div>
         <br>
       </li>
+
       <li>
         <button type="submit" [disabled]="f.invalid">Create Transaction</button>
       </li>
     </ul>
   </div>
 </form>
-

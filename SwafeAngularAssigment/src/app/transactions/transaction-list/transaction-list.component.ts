@@ -1,45 +1,43 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CreditCardService } from 'src/app/credit-card/credit-card.service';
+import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../transaction.service';
-import { CreditCard, Transaction } from 'src/app/types';
-import { filter, map } from 'rxjs/operators'
-import { Observable, of } from 'rxjs';
-
-
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss']
 })
+
 export class TransactionListComponent implements OnInit {
 
-  public transArray: Observable<Array<any>>  | null = null;
+  public transArray: Observable<Array<any>> | null = null;
   constructor(public transService: TransactionService) { }
 
   ngOnInit(): void {
-   this.transArray = this.transService.getTransactions();
+    this.getTransactions();
   }
 
   filter(cardNumber: string) {
-   
-    if(cardNumber === "")
-    {
+    console.log("filter: ", cardNumber);
+    if (cardNumber === "") {
       return;
     }
-   this.transArray = this.transService.getFilteredTrans(cardNumber);
+    this.transArray = this.transService.getFilteredTrans(cardNumber);
   }
 
   reset() {
-    this.transArray = this.transService.getTransactions();
-  }
-  
-deleteTransaction(id: string): void {
-    console.log(id);
-    this.transService.deleteTransaction(id).subscribe();
-  
+    this.getTransactions();
   }
 
+  deleteTransaction(id: string): void {
+    const res = this.transService.deleteTransaction(id).subscribe(() => {
+      this.getTransactions();
+    });
+  }
+
+  private getTransactions() {
+    this.transArray = this.transService.getTransactions();
+  }
 }
 
 

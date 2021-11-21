@@ -1,26 +1,32 @@
-
 <h1>Transactions</h1>
 
-<input type="text" id="search" name="search" #search>
-<button type="button" (click)="filter(search.value)">
-    Filter
-</button>
-<button type="button" (click)="reset()">
-    Reset
-</button>
-<button type="button" >
-    <a routerLink="addTransaction" > add transaction</a>
-</button>
+<div>
+    <div>
+        <input type="text" id="search" name="search" #search>
+    </div>
+    <div>
+        <button type="button" class="button" (click)="filter(search.value)">
+            Filter
+        </button>
+        <button type="button" class="button" (click)="reset()">
+            Reset
+        </button>
+    </div>
+    <button type="button">
+        <a routerLink="addTransaction"> add transaction</a>
+    </button>
+</div>
+
 <li *ngFor="let Transaction of transArray | async">
     <p> Card number: {{Transaction.credit_card.card_number}}</p>
     <p>{{Transaction.amount | number:'1.1-2'}} {{Transaction.currency}} </p>
     <p>{{Transaction.comment}}</p>
     <p>Transaction date: <br> {{Transaction.date | date:'medium'}}</p>
-    <button type="button" (click)="filter(Transaction.credit_card.card_number.toString())">
+    <button type="button" class="button" (click)="filter(Transaction.credit_card.card_number.toString())">
         Filter by this card number
     </button>
     <br>
-    <button type="button" (click)="deleteTransaction(Transaction.uid)">
+    <button type="button" class="button" (click)="deleteTransaction(Transaction.uid)">
         Delete transaction
     </button>
 </li>

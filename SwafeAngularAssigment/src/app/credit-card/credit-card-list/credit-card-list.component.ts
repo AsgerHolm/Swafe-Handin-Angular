@@ -3,7 +3,6 @@ import { CreditCardService } from '../credit-card.service';
 import { Observable } from 'rxjs';
 import { CreditCard } from 'src/app/types';
 
-
 @Component({
   selector: 'app-credit-card-list',
   templateUrl: './credit-card-list.component.html',
@@ -18,5 +17,4 @@ export class CreditCardListComponent implements OnInit {
   ngOnInit(): void {
     this.cards = this.creditCardService.getCreditCards();
   }
-
 }

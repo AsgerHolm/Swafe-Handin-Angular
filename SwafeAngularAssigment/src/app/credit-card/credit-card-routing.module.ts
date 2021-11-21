@@ -17,7 +17,6 @@ const routes: Routes = [
     path: 'details/:id',
     component: CreditCardDetailsComponent
   },
-  
 ];
 
 @NgModule({
